@@ -32,13 +32,13 @@ fn main() {
             "exit" => return,
             command => {
                 // spawn process
-                let mut child = Command::new(command)
+                let child = Command::new(command)
                     .args(args)
                     .spawn();
 
                 // graceful error handling
                 match child {
-                    Ok(mut child) => { child.wait(); },
+                    Ok(mut child) => { child.wait().unwrap(); },
                     Err(e) => eprintln!("{}", e),
                 }
             }
